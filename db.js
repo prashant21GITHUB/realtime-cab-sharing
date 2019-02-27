@@ -169,7 +169,7 @@ function getNearbyCabsLocation(lat, lng, targetDistance) {
                 return distanceBetweenTwoLocations < targetDistance;
             })
             
-            dbResolve(JSON.stringify(filteredLocations));
+            dbResolve(filteredLocations);
         }, (error) => {
             dbReject({
                 errorMessage: error
