@@ -1,0 +1,17 @@
+{
+  "name": "realtime-uber",
+  "version": "1.0.0",
+  "description": "Real time user like",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.5.5",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mysql": "^2.16.0"
+  }
+}
