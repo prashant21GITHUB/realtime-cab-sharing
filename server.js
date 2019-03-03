@@ -1,10 +1,13 @@
 const express = require("express");
 const path = require("path");
 const db = require("./db");
+const body_parser = require("body-parser");
 
 var app = express();
 
 app.use(express.static(__dirname+"/public"));
+
+app.use(body_parser.json()); // for parsing application/json
 
 // Enable CORS
 app.use(function(req, res, next) {
@@ -26,6 +29,22 @@ app.get("/api/getRegisteredUsers", (req, res) => {
     // res.send(db.getRegisteredUsers());
 });
 
+app.put("/api/updateCurrentLocation", (req, res) =>{
+    db.updateCurrentLocation(req.body).then((success) => {
+        res.send(success);
+    }, (errorMessage) => {
+        res.send(errorMessage);
+    });
+});
+
+app.post("/api/registerUser", (req, res) => {
+    db.registerNewUser(req.body).then((new_user) => {
+        res.send(new_user);
+    }, (errorMessage) => {
+        res.send(errorMessage);
+    });
+});
+
 app.get("/api/getNearbyCabs", (req, res) => {
     if(req.query.latlng == undefined) {
         res.send("Latitude and longitude are not provided in input!!");
@@ -43,7 +62,6 @@ app.get("/api/getNearbyCabs", (req, res) => {
     }, (errorMessage) => {
         res.send(errorMessage);
     });
-    // res.send(db.getRegisteredUsers());
 });
 
 app.get("/bad", (req, res) => {
@@ -53,5 +71,3 @@ app.get("/bad", (req, res) => {
 });
 
 app.listen(3000);
-
-// db.getRegisteredUsers();
